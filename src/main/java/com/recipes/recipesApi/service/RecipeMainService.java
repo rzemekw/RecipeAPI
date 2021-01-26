@@ -42,7 +42,11 @@ public class RecipeMainService implements RecipeService{
 
     @Override
     public RecipeDTO getRecipe(long id) {
-        return mappingService.mapToRecipeDto(recipeRepository.findById(id).orElse(null));
+        var recipe = recipeRepository.findById(id).orElse(null);
+        if(recipe == null) {
+            return null;
+        }
+        return mappingService.mapToRecipeDto(recipe);
     }
 
     @Override
